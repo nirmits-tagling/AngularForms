@@ -1,2 +1,165 @@
-<app-operations></app-operations>
+<div class="row">
+  <div class="col-6">
+    <form #myForm="ngForm" (ngSubmit)="submit()">
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter First Name"
+          name="fName"
+          #fName="ngModel"
+          ngModel
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter Last Name"
+          name="lName"
+          ngModel
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input
+          type="email"
+          class="form-control"
+          placeholder="Enter email"
+          name="email"
+          required
+          pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+          minlength="10"
+          placeholder="Enter email"
+          #email="ngModel"
+          ngModel
+        />
+
+        <!-- <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+        <div *ngIf="email.errors?.['required']">Email is required.</div>
+        <div class="invalid-feedback" *ngIf="email.errors?.['pattern']">THIS EMAIL NOT VALID</div>
+        <div *ngIf="email.errors?.['minlength']">
+          Name must be at least 10 characters long.
+        </div>
+       
+        <div *ngIf="email.errors?.['forbiddenName']">Name cannot be Bob.</div> -->
+
+        <!-- </div> -->
+      </div>
+
+      <div class="form-group">
+        <label for="exampleInputEmail1">Phone NO.</label>
+        <input
+          type="email"
+          class="form-control"
+          placeholder="Enter Number"
+          (keypress)="numberOnly($event)"
+          name="mobileNo"
+          ngModel
+        />
+      </div>
+     <!-- Address -->
+     <div ngModelGroup="name" #nameCtrl="ngModelGroup">
+      <label for="exampleInputEmail1"></label>
+      <input name="city"  type="text"
+      class="form-control"
+      placeholder="Enter City Name"
+      name="cName"
+       ngModel>
+
+      <input name="country" type="text"
+      class="form-control"
+      placeholder="Enter Country Name"
+      name="cName" ngModel>
+
+      <input name="State" type="text"
+      class="form-control"
+      placeholder="Enter State Name"
+      name="sName" ngModel>
+    </div>
+
+
+
+
+     <!--Addresss-->
+      <div class="d-flex">
+        Gender
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="flexRadioDefault"
+            id="flexRadioDefault1"
+            name="gender"
+            ngModel
+          />
+          <label class="form-check-label" for="flexRadioDefault1"> Male </label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="flexRadioDefault"
+            id="flexRadioDefault2"
+            name="gender"
+            ngModel
+          />
+          <label class="form-check-label" for="flexRadioDefault2">
+            Female
+          </label>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary"
+        (click)="showData(formData)" >Submit</button>
+    </form>
+  </div>
+
+  <div class="col-6">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">Phone Number</th>
+          <th scope="col">Email</th>
+          <th scope="col">Address</th>
+          <th scope="col">City</th>
+          <th scope="col">State</th>
+          <th scope="col">Zip</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let datas of data ; let i = index">
+          <th scope="row">{{i + 1 }}</th>
+          <td>{{ datas.fName }}</td>
+          <td>{{ datas.lName }}</td>
+          <td>{{ datas.mobileNo }}</td>
+          <td>{{ datas.email }}</td>
+          <td>{{ datas.address }}</td>
+          <td>{{datas.city}}</td>
+          <td>{{datas.street}}</td>
+          <td>{{datas.zip}}</td>
+        
+
+          <td><button (click)="editData(datas)">Edit</button></td>
+          <td><button (click)="deleteData(formData)">Delete</button></td>
+        </tr>
+        <li  *ngIf="data?.length == 0">
+          <span class="search_no_results">
+             No data found 
+          </span>
+      </li>
+      </tbody>
+    </table>
+  </div>
+</div>
+
 <router-outlet></router-outlet>
